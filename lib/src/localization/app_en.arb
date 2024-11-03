@@ -1,0 +1,6 @@
+{
+  "appTitle": "personal_finance_tracker",
+  "@appTitle": {
+    "description": "The title of the application"
+  }
+}
