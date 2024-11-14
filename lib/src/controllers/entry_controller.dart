@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:get/get.dart';
 import 'package:personal_finance_tracker/src/models/models.dart';
 import 'package:personal_finance_tracker/src/services/services.dart';
@@ -58,5 +59,17 @@ class EntryController {
     }
 
     return filteredEntries.toList();
+  }
+
+  Map<String, BigInt> incomeByCategory() {
+    final grouped = groupBy(incomeEntries, (e) => e.category);
+    return grouped
+        .map((k, v) => MapEntry(k, v.fold(BigInt.zero, (a, b) => a + b.value)));
+  }
+
+  Map<String, BigInt> expenseByCategory() {
+    final grouped = groupBy(expenseEntries, (e) => e.category);
+    return grouped
+        .map((k, v) => MapEntry(k, v.fold(BigInt.zero, (a, b) => a + b.value)));
   }
 }

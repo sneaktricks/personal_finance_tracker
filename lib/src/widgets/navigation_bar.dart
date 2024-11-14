@@ -15,6 +15,8 @@ class NavBar extends StatelessWidget {
         BottomNavigationBarItem(
             icon: Icon(Icons.attach_money), label: "Add Entry"),
         BottomNavigationBarItem(icon: Icon(Icons.list), label: "Transactions"),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.bar_chart_outlined), label: "Statistics"),
       ],
       currentIndex: navigationController.tabIndex.value,
       onTap: (i) => navigationController.setTabIndex(i),

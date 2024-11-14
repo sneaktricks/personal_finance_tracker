@@ -1,5 +1,7 @@
 import 'package:intl/intl.dart';
 
+final NumberFormat percentageFormat =
+    NumberFormat.decimalPercentPattern(decimalDigits: 2);
 final NumberFormat currencyFormat = NumberFormat.simpleCurrency();
 final NumberFormat compactCurrencyFormat = NumberFormat.compactCurrency();
 

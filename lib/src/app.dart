@@ -7,6 +7,7 @@ import 'package:personal_finance_tracker/src/pages/add_expense_page.dart';
 import 'package:personal_finance_tracker/src/pages/add_income_page.dart';
 import 'package:personal_finance_tracker/src/pages/home_page.dart';
 import 'package:personal_finance_tracker/src/pages/page_base.dart';
+import 'package:personal_finance_tracker/src/pages/statistics_page.dart';
 import 'package:personal_finance_tracker/src/pages/transaction_page.dart';
 import 'package:personal_finance_tracker/src/pages/transactions_page.dart';
 
@@ -58,6 +59,7 @@ class MyApp extends StatelessWidget {
         GetPage(name: "/add-entry/expense", page: () => AddExpensePage()),
         GetPage(name: "/transactions", page: () => TransactionsPage()),
         GetPage(name: "/transactions/:id", page: () => TransactionPage()),
+        GetPage(name: "/statistics", page: () => StatisticsPage()),
       ],
 
       // builder: (context, child) {

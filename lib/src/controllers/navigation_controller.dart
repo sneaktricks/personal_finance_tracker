@@ -7,7 +7,8 @@ class NavigationController extends GetxController {
     "/",
     "/add-entry",
     "/transactions",
-    "/transactions/:id"
+    "/statistics",
+    "/transactions/:id",
   ];
 
   NavigationController();
