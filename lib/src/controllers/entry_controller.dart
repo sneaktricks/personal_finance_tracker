@@ -35,6 +35,16 @@ class EntryController {
     expenseEntries.add(entry);
   }
 
+  void deleteExpense(ExpenseEntry entry) {
+    expenseService.entries.removeWhere((e) => e.id == entry.id);
+    expenseEntries.removeWhere((e) => e.id == entry.id);
+  }
+
+  void deleteIncome(IncomeEntry entry) {
+    incomeService.entries.removeWhere((e) => e.id == entry.id);
+    incomeEntries.removeWhere((e) => e.id == entry.id);
+  }
+
   TransactionEntry? findById(String id) {
     return incomeEntries.firstWhereOrNull((e) => e.id == id) ??
         expenseEntries.firstWhereOrNull((e) => e.id == id);

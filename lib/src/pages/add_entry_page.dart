@@ -16,25 +16,38 @@ class AddEntryPage extends StatelessWidget {
 
     return Scaffold(
       body: ConstrainedView(
-        child: Column(children: [
-          const Text("What type of entry shall we add?"),
-          FilledButton.icon(
-            onPressed: () => Get.toNamed("/add-entry/income"),
-            label: const Text("Income"),
-            icon: const Icon(Icons.monetization_on),
-            style: const ButtonStyle(
-              backgroundColor: WidgetStatePropertyAll(Colors.green),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const Text(
+              "What type of entry do you want to add?",
+              style: TextStyle(fontSize: 20),
             ),
-          ),
-          FilledButton.icon(
-            onPressed: () => Get.toNamed("/add-entry/expense"),
-            label: const Text("Expense"),
-            icon: const Icon(Icons.credit_card),
-            style: const ButtonStyle(
-              backgroundColor: WidgetStatePropertyAll(Colors.red),
+            const SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                FilledButton.icon(
+                  onPressed: () => Get.toNamed("/add-entry/income"),
+                  label: const Text("Income"),
+                  icon: const Icon(Icons.monetization_on),
+                  style: const ButtonStyle(
+                    backgroundColor: WidgetStatePropertyAll(Colors.green),
+                  ),
+                ),
+                const SizedBox(width: 10),
+                FilledButton.icon(
+                  onPressed: () => Get.toNamed("/add-entry/expense"),
+                  label: const Text("Expense"),
+                  icon: const Icon(Icons.credit_card),
+                  style: const ButtonStyle(
+                    backgroundColor: WidgetStatePropertyAll(Colors.red),
+                  ),
+                ),
+              ],
             ),
-          ),
-        ]),
+          ],
+        ),
       ),
       appBar: AppBar(
         title: const Text("Add Entry"),

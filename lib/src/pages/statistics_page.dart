@@ -44,12 +44,7 @@ class StatisticsPage extends StatelessWidget {
         ),
       ),
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () => Get.back(),
-          tooltip: "Back",
-        ),
-        title: const Text("Statistics"),
+        title: const Text("All-Time Statistics"),
       ),
       bottomNavigationBar: widthToView(width) < 1 ? NavBar() : null,
     );

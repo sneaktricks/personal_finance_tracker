@@ -32,7 +32,10 @@ class HomePage extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text("Balance this month"),
+          const Text(
+            "Your balance this month",
+            style: TextStyle(fontSize: 20),
+          ),
           // Obx(
           //   () => AnimatedCurrency(
           //     value: balanceThisMonth.value.toDouble(),

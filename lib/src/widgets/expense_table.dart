@@ -65,7 +65,8 @@ class ExpenseTable extends StatelessWidget {
               TextSpan(text: categoryIdToName[element.key] ?? "Unknown"),
             ]),
           )),
-          DataCell(Text(currencyFormat.format(element.value.toDouble() / 100))),
+          DataCell(
+              Text(currencyFormat.format(-element.value.toDouble() / 100))),
           DataCell(Text(
               percentageFormat.format(element.value.toDouble() / expenseSum))),
         ]);

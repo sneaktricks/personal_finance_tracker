@@ -5,9 +5,7 @@ import 'package:get/get.dart';
 import 'package:personal_finance_tracker/src/controllers/entry_controller.dart';
 import 'package:personal_finance_tracker/src/controllers/navigation_controller.dart';
 import 'package:personal_finance_tracker/src/models/models.dart';
-import 'package:personal_finance_tracker/src/utils/breakpoint.dart';
 import 'package:personal_finance_tracker/src/widgets/constrained_view.dart';
-import 'package:personal_finance_tracker/src/widgets/navigation_bar.dart';
 
 class AddExpensePage extends StatelessWidget {
   AddExpensePage({super.key});
@@ -32,10 +30,10 @@ class AddExpensePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
-
     return Scaffold(
       body: ConstrainedView(
+        omitNavRail: true,
+        maxWidth: 500,
         child: FormBuilder(
           key: _formKey,
           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -63,9 +61,10 @@ class AddExpensePage extends StatelessWidget {
                       return parsed;
                     }
                   }
-                  return value;
+                  return 0;
                 },
               ),
+              const SizedBox(height: 10),
               FormBuilderDropdown(
                 name: "category",
                 decoration: const InputDecoration(
@@ -127,6 +126,7 @@ class AddExpensePage extends StatelessWidget {
                   FormBuilderValidators.required(),
                 ]),
               ),
+              const SizedBox(height: 10),
               FormBuilderDateTimePicker(
                 name: "date",
                 currentDate: DateTime.now(),
@@ -141,6 +141,7 @@ class AddExpensePage extends StatelessWidget {
                   FormBuilderValidators.required(),
                 ]),
               ),
+              const SizedBox(height: 20),
               ElevatedButton.icon(
                 onPressed: _submit,
                 label: const Text("Add expense"),
@@ -157,7 +158,6 @@ class AddExpensePage extends StatelessWidget {
         ),
         title: const Text("Add Expense"),
       ),
-      bottomNavigationBar: widthToView(width) < 1 ? NavBar() : null,
     );
   }
 }
