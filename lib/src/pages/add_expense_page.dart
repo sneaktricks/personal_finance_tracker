@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import 'package:personal_finance_tracker/src/controllers/entry_controller.dart';
 import 'package:personal_finance_tracker/src/controllers/navigation_controller.dart';
 import 'package:personal_finance_tracker/src/models/models.dart';
+import 'package:personal_finance_tracker/src/utils/breakpoint.dart';
+import 'package:personal_finance_tracker/src/widgets/constrained_view.dart';
 import 'package:personal_finance_tracker/src/widgets/navigation_bar.dart';
 
 class AddExpensePage extends StatelessWidget {
@@ -30,118 +32,122 @@ class AddExpensePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+
     return Scaffold(
-      body: FormBuilder(
-        key: _formKey,
-        autovalidateMode: AutovalidateMode.onUserInteraction,
-        child: Column(
-          children: [
-            FormBuilderTextField(
-              name: "value",
-              decoration: const InputDecoration(
-                labelText: "Cost",
-                prefixText: "\$",
-                border: OutlineInputBorder(),
-              ),
-              keyboardType: const TextInputType.numberWithOptions(
-                  signed: false, decimal: true),
-              validator: FormBuilderValidators.compose([
-                FormBuilderValidators.required(),
-                FormBuilderValidators.numeric(),
-                FormBuilderValidators.positiveNumber(),
-                FormBuilderValidators.max(1e15 - 1),
-              ]),
-              valueTransformer: (value) {
-                if (value != null) {
-                  final parsed = double.tryParse(value);
-                  if (parsed != null && parsed.isFinite) {
-                    return parsed;
+      body: ConstrainedView(
+        child: FormBuilder(
+          key: _formKey,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          child: Column(
+            children: [
+              FormBuilderTextField(
+                name: "value",
+                decoration: const InputDecoration(
+                  labelText: "Cost",
+                  prefixText: "\$",
+                  border: OutlineInputBorder(),
+                ),
+                keyboardType: const TextInputType.numberWithOptions(
+                    signed: false, decimal: true),
+                validator: FormBuilderValidators.compose([
+                  FormBuilderValidators.required(),
+                  FormBuilderValidators.numeric(),
+                  FormBuilderValidators.positiveNumber(),
+                  FormBuilderValidators.max(1e15 - 1),
+                ]),
+                valueTransformer: (value) {
+                  if (value != null) {
+                    final parsed = double.tryParse(value);
+                    if (parsed != null && parsed.isFinite) {
+                      return parsed;
+                    }
                   }
-                }
-                return value;
-              },
-            ),
-            FormBuilderDropdown(
-              name: "category",
-              decoration: const InputDecoration(
-                labelText: "Category",
-                hintText: "What type of expense are you adding?",
-                border: OutlineInputBorder(),
+                  return value;
+                },
               ),
-              items: const [
-                DropdownMenuItem(
-                  value: "housing",
-                  child: Text("Housing"),
+              FormBuilderDropdown(
+                name: "category",
+                decoration: const InputDecoration(
+                  labelText: "Category",
+                  hintText: "What type of expense are you adding?",
+                  border: OutlineInputBorder(),
                 ),
-                DropdownMenuItem(
-                  value: "transportation",
-                  child: Text("Transportation"),
-                ),
-                DropdownMenuItem(
-                  value: "groceries",
-                  child: Text("Food & Groceries"),
-                ),
-                DropdownMenuItem(
-                  value: "entertainment",
-                  child: Text("Entertainment"),
-                ),
-                DropdownMenuItem(
-                  value: "debt",
-                  child: Text("Debt Repayment"),
-                ),
-                DropdownMenuItem(
-                  value: "insurance",
-                  child: Text("Insurance"),
-                ),
-                DropdownMenuItem(
-                  value: "health",
-                  child: Text("Health & Wellness"),
-                ),
-                DropdownMenuItem(
-                  value: "personal_care",
-                  child: Text("Personal Care"),
-                ),
-                DropdownMenuItem(
-                  value: "education",
-                  child: Text("Education"),
-                ),
-                DropdownMenuItem(
-                  value: "family",
-                  child: Text("Child & Family Care"),
-                ),
-                DropdownMenuItem(
-                  value: "savings",
-                  child: Text("Savings & Investments"),
-                ),
-                DropdownMenuItem(
-                  value: "other",
-                  child: Text("Other"),
-                ),
-              ],
-              validator: FormBuilderValidators.compose([
-                FormBuilderValidators.required(),
-              ]),
-            ),
-            FormBuilderDateTimePicker(
-              name: "date",
-              currentDate: DateTime.now(),
-              initialValue: DateTime.now(),
-              inputType: InputType.date,
-              decoration: const InputDecoration(
-                labelText: "Date",
-                hintText: "When did you receive this expense?",
-                border: OutlineInputBorder(),
+                items: const [
+                  DropdownMenuItem(
+                    value: "housing",
+                    child: Text("Housing"),
+                  ),
+                  DropdownMenuItem(
+                    value: "transportation",
+                    child: Text("Transportation"),
+                  ),
+                  DropdownMenuItem(
+                    value: "groceries",
+                    child: Text("Food & Groceries"),
+                  ),
+                  DropdownMenuItem(
+                    value: "entertainment",
+                    child: Text("Entertainment"),
+                  ),
+                  DropdownMenuItem(
+                    value: "debt",
+                    child: Text("Debt Repayment"),
+                  ),
+                  DropdownMenuItem(
+                    value: "insurance",
+                    child: Text("Insurance"),
+                  ),
+                  DropdownMenuItem(
+                    value: "health",
+                    child: Text("Health & Wellness"),
+                  ),
+                  DropdownMenuItem(
+                    value: "personal_care",
+                    child: Text("Personal Care"),
+                  ),
+                  DropdownMenuItem(
+                    value: "education",
+                    child: Text("Education"),
+                  ),
+                  DropdownMenuItem(
+                    value: "family",
+                    child: Text("Child & Family Care"),
+                  ),
+                  DropdownMenuItem(
+                    value: "savings",
+                    child: Text("Savings & Investments"),
+                  ),
+                  DropdownMenuItem(
+                    value: "other",
+                    child: Text("Other"),
+                  ),
+                ],
+                validator: FormBuilderValidators.compose([
+                  FormBuilderValidators.required(),
+                ]),
               ),
-              validator: FormBuilderValidators.compose([
-                FormBuilderValidators.required(),
-              ]),
-            ),
-            ElevatedButton.icon(
-              onPressed: _submit,
-              label: const Text("Add expense"),
-              icon: const Icon(Icons.add),
-            )
-          ],
+              FormBuilderDateTimePicker(
+                name: "date",
+                currentDate: DateTime.now(),
+                initialValue: DateTime.now(),
+                inputType: InputType.date,
+                decoration: const InputDecoration(
+                  labelText: "Date",
+                  hintText: "When did you receive this expense?",
+                  border: OutlineInputBorder(),
+                ),
+                validator: FormBuilderValidators.compose([
+                  FormBuilderValidators.required(),
+                ]),
+              ),
+              ElevatedButton.icon(
+                onPressed: _submit,
+                label: const Text("Add expense"),
+                icon: const Icon(Icons.add),
+              )
+            ],
+          ),
         ),
       ),
       appBar: AppBar(
@@ -151,7 +157,7 @@ class AddExpensePage extends StatelessWidget {
         ),
         title: const Text("Add Expense"),
       ),
-      bottomNavigationBar: NavBar(),
+      bottomNavigationBar: widthToView(width) < 1 ? NavBar() : null,
     );
   }
 }

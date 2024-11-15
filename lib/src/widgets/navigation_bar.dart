@@ -10,6 +10,10 @@ class NavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
+      useLegacyColorScheme: false,
+      showSelectedLabels: true,
+      type: BottomNavigationBarType.fixed,
+      showUnselectedLabels: true,
       items: const [
         BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
         BottomNavigationBarItem(

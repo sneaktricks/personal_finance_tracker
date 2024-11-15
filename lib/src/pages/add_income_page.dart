@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import 'package:personal_finance_tracker/src/controllers/entry_controller.dart';
 import 'package:personal_finance_tracker/src/controllers/navigation_controller.dart';
 import 'package:personal_finance_tracker/src/models/models.dart';
+import 'package:personal_finance_tracker/src/utils/breakpoint.dart';
+import 'package:personal_finance_tracker/src/widgets/constrained_view.dart';
 import 'package:personal_finance_tracker/src/widgets/navigation_bar.dart';
 
 class AddIncomePage extends StatelessWidget {
@@ -30,110 +32,114 @@ class AddIncomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+
     return Scaffold(
-      body: FormBuilder(
-        key: _formKey,
-        autovalidateMode: AutovalidateMode.onUserInteraction,
-        child: Column(
-          children: [
-            FormBuilderTextField(
-              name: "value",
-              decoration: const InputDecoration(
-                labelText: "Income value",
-                prefixText: "\$",
-                border: OutlineInputBorder(),
-              ),
-              keyboardType: const TextInputType.numberWithOptions(
-                  signed: false, decimal: true),
-              validator: FormBuilderValidators.compose([
-                FormBuilderValidators.required(),
-                FormBuilderValidators.numeric(),
-                FormBuilderValidators.positiveNumber(),
-                FormBuilderValidators.max(1e15 - 1),
-              ]),
-              valueTransformer: (value) {
-                if (value != null) {
-                  final parsed = double.tryParse(value);
-                  if (parsed != null && parsed.isFinite) {
-                    return parsed;
+      body: ConstrainedView(
+        child: FormBuilder(
+          key: _formKey,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          child: Column(
+            children: [
+              FormBuilderTextField(
+                name: "value",
+                decoration: const InputDecoration(
+                  labelText: "Income value",
+                  prefixText: "\$",
+                  border: OutlineInputBorder(),
+                ),
+                keyboardType: const TextInputType.numberWithOptions(
+                    signed: false, decimal: true),
+                validator: FormBuilderValidators.compose([
+                  FormBuilderValidators.required(),
+                  FormBuilderValidators.numeric(),
+                  FormBuilderValidators.positiveNumber(),
+                  FormBuilderValidators.max(1e15 - 1),
+                ]),
+                valueTransformer: (value) {
+                  if (value != null) {
+                    final parsed = double.tryParse(value);
+                    if (parsed != null && parsed.isFinite) {
+                      return parsed;
+                    }
                   }
-                }
-                return value;
-              },
-            ),
-            FormBuilderDropdown(
-              name: "category",
-              decoration: const InputDecoration(
-                labelText: "Category",
-                hintText: "What type of income did you receive?",
-                border: OutlineInputBorder(),
+                  return value;
+                },
               ),
-              items: const [
-                DropdownMenuItem(
-                  value: "salary",
-                  child: Text("Salary"),
+              FormBuilderDropdown(
+                name: "category",
+                decoration: const InputDecoration(
+                  labelText: "Category",
+                  hintText: "What type of income did you receive?",
+                  border: OutlineInputBorder(),
                 ),
-                DropdownMenuItem(
-                  value: "bonus",
-                  child: Text("Bonus/Commission"),
-                ),
-                DropdownMenuItem(
-                  value: "freelance",
-                  child: Text("Freelance/Side Hustle"),
-                ),
-                DropdownMenuItem(
-                  value: "investment",
-                  child: Text("Investment Income"),
-                ),
-                DropdownMenuItem(
-                  value: "rental",
-                  child: Text("Rental Income"),
-                ),
-                DropdownMenuItem(
-                  value: "business",
-                  child: Text("Business Income"),
-                ),
-                DropdownMenuItem(
-                  value: "pension",
-                  child: Text("Pension/Social Security"),
-                ),
-                DropdownMenuItem(
-                  value: "child_support",
-                  child: Text("Child Support"),
-                ),
-                DropdownMenuItem(
-                  value: "gift",
-                  child: Text("Gift/Donation"),
-                ),
-                DropdownMenuItem(
-                  value: "other",
-                  child: Text("Other"),
-                ),
-              ],
-              validator: FormBuilderValidators.compose([
-                FormBuilderValidators.required(),
-              ]),
-            ),
-            FormBuilderDateTimePicker(
-              name: "date",
-              currentDate: DateTime.now(),
-              initialValue: DateTime.now(),
-              inputType: InputType.date,
-              decoration: const InputDecoration(
-                labelText: "Date",
-                hintText: "When did you receive this income?",
-                border: OutlineInputBorder(),
+                items: const [
+                  DropdownMenuItem(
+                    value: "salary",
+                    child: Text("Salary"),
+                  ),
+                  DropdownMenuItem(
+                    value: "bonus",
+                    child: Text("Bonus/Commission"),
+                  ),
+                  DropdownMenuItem(
+                    value: "freelance",
+                    child: Text("Freelance/Side Hustle"),
+                  ),
+                  DropdownMenuItem(
+                    value: "investment",
+                    child: Text("Investment Income"),
+                  ),
+                  DropdownMenuItem(
+                    value: "rental",
+                    child: Text("Rental Income"),
+                  ),
+                  DropdownMenuItem(
+                    value: "business",
+                    child: Text("Business Income"),
+                  ),
+                  DropdownMenuItem(
+                    value: "pension",
+                    child: Text("Pension/Social Security"),
+                  ),
+                  DropdownMenuItem(
+                    value: "child_support",
+                    child: Text("Child Support"),
+                  ),
+                  DropdownMenuItem(
+                    value: "gift",
+                    child: Text("Gift/Donation"),
+                  ),
+                  DropdownMenuItem(
+                    value: "other",
+                    child: Text("Other"),
+                  ),
+                ],
+                validator: FormBuilderValidators.compose([
+                  FormBuilderValidators.required(),
+                ]),
               ),
-              validator: FormBuilderValidators.compose([
-                FormBuilderValidators.required(),
-              ]),
-            ),
-            ElevatedButton.icon(
-              onPressed: _submit,
-              label: const Text("Add income"),
-              icon: const Icon(Icons.add),
-            )
-          ],
+              FormBuilderDateTimePicker(
+                name: "date",
+                currentDate: DateTime.now(),
+                initialValue: DateTime.now(),
+                inputType: InputType.date,
+                decoration: const InputDecoration(
+                  labelText: "Date",
+                  hintText: "When did you receive this income?",
+                  border: OutlineInputBorder(),
+                ),
+                validator: FormBuilderValidators.compose([
+                  FormBuilderValidators.required(),
+                ]),
+              ),
+              ElevatedButton.icon(
+                onPressed: _submit,
+                label: const Text("Add income"),
+                icon: const Icon(Icons.add),
+              )
+            ],
+          ),
         ),
       ),
       appBar: AppBar(
@@ -143,7 +149,7 @@ class AddIncomePage extends StatelessWidget {
         ),
         title: const Text("Add Income"),
       ),
-      bottomNavigationBar: NavBar(),
+      bottomNavigationBar: widthToView(width) < 1 ? NavBar() : null,
     );
   }
 }
