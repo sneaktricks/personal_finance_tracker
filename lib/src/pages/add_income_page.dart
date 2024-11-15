@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:personal_finance_tracker/src/controllers/entry_controller.dart';
 import 'package:personal_finance_tracker/src/controllers/navigation_controller.dart';
 import 'package:personal_finance_tracker/src/models/models.dart';
+import 'package:personal_finance_tracker/src/utils/categoryid_to_text.dart';
 import 'package:personal_finance_tracker/src/widgets/constrained_view.dart';
 
 class AddIncomePage extends StatelessWidget {
@@ -72,48 +73,19 @@ class AddIncomePage extends StatelessWidget {
                   hintText: "What type of income did you receive?",
                   border: OutlineInputBorder(),
                 ),
-                items: const [
-                  DropdownMenuItem(
-                    value: "salary",
-                    child: Text("Salary"),
-                  ),
-                  DropdownMenuItem(
-                    value: "bonus",
-                    child: Text("Bonus/Commission"),
-                  ),
-                  DropdownMenuItem(
-                    value: "freelance",
-                    child: Text("Freelance/Side Hustle"),
-                  ),
-                  DropdownMenuItem(
-                    value: "investment",
-                    child: Text("Investment Income"),
-                  ),
-                  DropdownMenuItem(
-                    value: "rental",
-                    child: Text("Rental Income"),
-                  ),
-                  DropdownMenuItem(
-                    value: "business",
-                    child: Text("Business Income"),
-                  ),
-                  DropdownMenuItem(
-                    value: "pension",
-                    child: Text("Pension/Social Security"),
-                  ),
-                  DropdownMenuItem(
-                    value: "child_support",
-                    child: Text("Child Support"),
-                  ),
-                  DropdownMenuItem(
-                    value: "gift",
-                    child: Text("Gift/Donation"),
-                  ),
-                  DropdownMenuItem(
-                    value: "other",
-                    child: Text("Other"),
-                  ),
-                ],
+                items: incomeCategories
+                    .map((e) => DropdownMenuItem(
+                        value: e,
+                        child: Text.rich(
+                          TextSpan(children: [
+                            WidgetSpan(
+                              alignment: PlaceholderAlignment.middle,
+                              child: Icon(categoryIdToIcon[e]),
+                            ),
+                            TextSpan(text: categoryIdToName[e] ?? "Unknown"),
+                          ]),
+                        )))
+                    .toList(),
                 validator: FormBuilderValidators.compose([
                   FormBuilderValidators.required(),
                 ]),

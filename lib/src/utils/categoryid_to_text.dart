@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-final categoryIdToName = {
+const categoryIdToName = {
   // Income
   "salary": "Salary",
   "bonus": "Bonus/Commission",
@@ -26,7 +26,7 @@ final categoryIdToName = {
   "other": "Other",
 };
 
-final categoryIdToIcon = {
+const categoryIdToIcon = {
   // Income
   "salary": Icons.work,
   "bonus": Icons.star,
@@ -51,3 +51,31 @@ final categoryIdToIcon = {
   "savings": Icons.savings,
   "other": Icons.monetization_on,
 };
+
+const incomeCategories = [
+  "salary",
+  "bonus",
+  "freelance",
+  "investment",
+  "rental",
+  "business",
+  "pension",
+  "child_support",
+  "gift",
+  "other",
+];
+
+const expenseCategories = [
+  "housing",
+  "transportation",
+  "groceries",
+  "entertainment",
+  "debt",
+  "insurance",
+  "health",
+  "personal_care",
+  "education",
+  "family",
+  "savings",
+  "other",
+];

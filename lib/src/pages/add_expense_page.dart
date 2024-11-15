@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:personal_finance_tracker/src/controllers/entry_controller.dart';
 import 'package:personal_finance_tracker/src/controllers/navigation_controller.dart';
 import 'package:personal_finance_tracker/src/models/models.dart';
+import 'package:personal_finance_tracker/src/utils/categoryid_to_text.dart';
 import 'package:personal_finance_tracker/src/widgets/constrained_view.dart';
 
 class AddExpensePage extends StatelessWidget {
@@ -72,56 +73,19 @@ class AddExpensePage extends StatelessWidget {
                   hintText: "What type of expense are you adding?",
                   border: OutlineInputBorder(),
                 ),
-                items: const [
-                  DropdownMenuItem(
-                    value: "housing",
-                    child: Text("Housing"),
-                  ),
-                  DropdownMenuItem(
-                    value: "transportation",
-                    child: Text("Transportation"),
-                  ),
-                  DropdownMenuItem(
-                    value: "groceries",
-                    child: Text("Food & Groceries"),
-                  ),
-                  DropdownMenuItem(
-                    value: "entertainment",
-                    child: Text("Entertainment"),
-                  ),
-                  DropdownMenuItem(
-                    value: "debt",
-                    child: Text("Debt Repayment"),
-                  ),
-                  DropdownMenuItem(
-                    value: "insurance",
-                    child: Text("Insurance"),
-                  ),
-                  DropdownMenuItem(
-                    value: "health",
-                    child: Text("Health & Wellness"),
-                  ),
-                  DropdownMenuItem(
-                    value: "personal_care",
-                    child: Text("Personal Care"),
-                  ),
-                  DropdownMenuItem(
-                    value: "education",
-                    child: Text("Education"),
-                  ),
-                  DropdownMenuItem(
-                    value: "family",
-                    child: Text("Child & Family Care"),
-                  ),
-                  DropdownMenuItem(
-                    value: "savings",
-                    child: Text("Savings & Investments"),
-                  ),
-                  DropdownMenuItem(
-                    value: "other",
-                    child: Text("Other"),
-                  ),
-                ],
+                items: expenseCategories
+                    .map((e) => DropdownMenuItem(
+                        value: e,
+                        child: Text.rich(
+                          TextSpan(children: [
+                            WidgetSpan(
+                              alignment: PlaceholderAlignment.middle,
+                              child: Icon(categoryIdToIcon[e]),
+                            ),
+                            TextSpan(text: categoryIdToName[e] ?? "Unknown"),
+                          ]),
+                        )))
+                    .toList(),
                 validator: FormBuilderValidators.compose([
                   FormBuilderValidators.required(),
                 ]),
