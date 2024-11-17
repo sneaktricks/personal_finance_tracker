@@ -16,7 +16,7 @@ a quick glance at your monthly balance on the home page.
 
 ## Try it Online
 
-TODO
+The application is available at https://flutter-finance-tracker-5a1d4.web.app/.
 
 ## User Manual
 

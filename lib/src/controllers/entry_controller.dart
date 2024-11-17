@@ -56,12 +56,14 @@ class EntryController {
     Iterable<T> filteredEntries = entries.whereType<T>();
 
     if (minDate != null) {
-      filteredEntries =
-          filteredEntries.where((e) => e.timestamp.isAfter(minDate));
+      filteredEntries = filteredEntries.where((e) =>
+          e.timestamp.isAfter(minDate) ||
+          e.timestamp.isAtSameMomentAs(minDate));
     }
     if (maxDate != null) {
-      filteredEntries =
-          filteredEntries.where((e) => e.timestamp.isBefore(maxDate));
+      filteredEntries = filteredEntries.where((e) =>
+          e.timestamp.isBefore(maxDate) ||
+          e.timestamp.isAtSameMomentAs(maxDate));
     }
     if (categories != null) {
       filteredEntries =
