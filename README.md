@@ -70,9 +70,9 @@ Textual labels on the navigation rail are shown on screens wider than 1024px.
   I tried wrapping the ToggleButtons in an Obx widget, but this caused
   an "improper use of a GetX has been detected" error on Firebase. Oddly enough, this error doesn't occur
   in the development build.
-- Newly added entries don't immediately appear in the transactions list. To fix this, drag either endpoint of the date
+- Newly added entries don't immediately appear in the transactions list. To fix this, drag either endpoint of the transaction date
   filter slider to any other value and back.
-
+- Commas are not accepted as a decimal separator.
 - The navigation bar and rail are re-rendered on page change.
 - The back button in the top-left corner shouldn't be rendered
   on pages with a navigation bar/rail. No idea why it's there...
