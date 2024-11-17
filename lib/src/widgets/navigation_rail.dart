@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:personal_finance_tracker/src/controllers/navigation_controller.dart';
 import 'package:personal_finance_tracker/src/utils/breakpoint.dart';
 
+/// Application-wide navigation rail
 class NavRail extends StatelessWidget {
   NavRail({super.key});
 

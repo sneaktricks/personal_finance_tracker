@@ -5,6 +5,8 @@ import 'package:personal_finance_tracker/src/utils/breakpoint.dart'
     as breakpoint;
 import 'package:personal_finance_tracker/src/widgets/navigation_rail.dart';
 
+/// ConstrainedView adds a conditional navigation rail and manages
+/// maximum content width.
 class ConstrainedView extends StatelessWidget {
   final Widget child;
   final double maxWidth;

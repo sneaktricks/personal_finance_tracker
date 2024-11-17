@@ -3,9 +3,9 @@ import 'package:get/get.dart';
 import 'package:personal_finance_tracker/src/controllers/navigation_controller.dart';
 import 'package:personal_finance_tracker/src/utils/breakpoint.dart';
 import 'package:personal_finance_tracker/src/widgets/constrained_view.dart';
-import 'package:personal_finance_tracker/src/widgets/expense_table.dart';
-import 'package:personal_finance_tracker/src/widgets/income_table.dart';
 import 'package:personal_finance_tracker/src/widgets/navigation_bar.dart';
+import 'package:personal_finance_tracker/src/widgets/optional_expense_table.dart';
+import 'package:personal_finance_tracker/src/widgets/optional_income_table.dart';
 
 class StatisticsPage extends StatelessWidget {
   StatisticsPage({super.key});
@@ -39,7 +39,9 @@ class StatisticsPage extends StatelessWidget {
                 ),
               ),
             ),
-            Obx(() => selectedTab.first ? IncomeTable() : ExpenseTable()),
+            Obx(() => selectedTab.first
+                ? OptionalIncomeTable()
+                : OptionalExpenseTable()),
           ],
         ),
       ),
@@ -47,6 +49,13 @@ class StatisticsPage extends StatelessWidget {
         title: const Text("All-Time Statistics"),
       ),
       bottomNavigationBar: widthToView(width) < 1 ? NavBar() : null,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          navigationController.setTabIndex(1);
+        },
+        tooltip: "Add income or expense",
+        child: const Icon(Icons.add),
+      ),
     );
   }
 }

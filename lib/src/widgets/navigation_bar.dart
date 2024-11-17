@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:personal_finance_tracker/src/controllers/navigation_controller.dart';
 
+/// Application-wide bottom navigation bar
 class NavBar extends StatelessWidget {
   NavBar({super.key});
 

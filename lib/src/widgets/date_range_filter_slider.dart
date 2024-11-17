@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get/get.dart';
+import 'package:personal_finance_tracker/src/controllers/entry_filter_controller.dart';
 
+/// Slider widget that is used to filter transaction entries by inception date.
 class DateRangeFilterSlider extends StatelessWidget {
   DateRangeFilterSlider({super.key, this.onChanged});
 
+  final _entryFilterController = Get.find<EntryFilterController>();
+
   final ValueChanged<DateTimeRange>? onChanged;
-  final Rx<RangeValues> _currentRangeValues = const RangeValues(-7, 0).obs;
   final _formKey = GlobalKey<FormBuilderState>();
 
+  /// Converts internal range value to label representing
+  /// a point in a [DateTimeRange].
   String label(double value) {
     return switch (value) {
       0 => "now",
@@ -23,6 +28,7 @@ class DateRangeFilterSlider extends StatelessWidget {
     };
   }
 
+  /// Converts a given [RangeValues] object into a [DateTimeRange].
   DateTimeRange rangeValuesToDateTimeRange(RangeValues rv) {
     final start = switch (rv.start) {
       0 => DateTime.now(),
@@ -64,28 +70,33 @@ class DateRangeFilterSlider extends StatelessWidget {
             min: -7,
             max: 0,
             divisions: 7,
-            initialValue: const RangeValues(-7, 0),
+            initialValue: _entryFilterController.dateRangeFilterValues.value,
             labels: RangeLabels(
-              label(_currentRangeValues.value.start.roundToDouble()),
-              label(_currentRangeValues.value.end.roundToDouble()),
+              label(_entryFilterController.dateRangeFilterValues.value.start
+                  .roundToDouble()),
+              label(_entryFilterController.dateRangeFilterValues.value.end
+                  .roundToDouble()),
             ),
             decoration: const InputDecoration(
               label: Text("Transaction date"),
             ),
             onChanged: (values) {
-              _currentRangeValues.value = values!;
+              _entryFilterController.dateRangeFilterValues.value = values!;
               onChanged!(rangeValuesToDateTimeRange(values));
             },
             minValueWidget: (_) => Text(label(-7)),
             maxValueWidget: (_) => Text(label(0)),
             valueWidget: (_) {
-              if (_currentRangeValues.value.start.roundToDouble() ==
-                  _currentRangeValues.value.end.roundToDouble()) {
-                return Text(
-                    label(_currentRangeValues.value.start.roundToDouble()));
+              if (_entryFilterController.dateRangeFilterValues.value.start
+                      .roundToDouble() ==
+                  _entryFilterController.dateRangeFilterValues.value.end
+                      .roundToDouble()) {
+                return Text(label(_entryFilterController
+                    .dateRangeFilterValues.value.start
+                    .roundToDouble()));
               }
               return Text(
-                  "${label(_currentRangeValues.value.start.roundToDouble())} to ${label(_currentRangeValues.value.end.roundToDouble())}");
+                  "${label(_entryFilterController.dateRangeFilterValues.value.start.roundToDouble())} to ${label(_entryFilterController.dateRangeFilterValues.value.end.roundToDouble())}");
             },
           ),
         ));

@@ -5,6 +5,10 @@ final NumberFormat percentageFormat =
 final NumberFormat currencyFormat = NumberFormat.simpleCurrency();
 final NumberFormat compactCurrencyFormat = NumberFormat.compactCurrency();
 
+/// Formats the given number of [cents] in a compact manner.
+/// Uses [compactCurrencyFormat] internally, but also handles
+/// special cases where the number of currency units exceeds
+/// 999T in magnitude.
 String formatCompactCurrency(double cents) {
   final units = cents / 100;
   // Handle goofy balance (>999T in magnitude)

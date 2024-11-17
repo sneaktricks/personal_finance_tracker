@@ -11,7 +11,7 @@ import 'package:personal_finance_tracker/src/pages/statistics_page.dart';
 import 'package:personal_finance_tracker/src/pages/transaction_page.dart';
 import 'package:personal_finance_tracker/src/pages/transactions_page.dart';
 
-/// The Widget that configures your application.
+/// The Widget that configures the Personal Finance Tracker application.
 class MyApp extends StatelessWidget {
   const MyApp({
     super.key,
@@ -19,10 +19,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Glue the SettingsController to the MaterialApp.
-    //
-    // The ListenableBuilder Widget listens to the SettingsController for changes.
-    // Whenever the user updates their settings, the MaterialApp is rebuilt.
     return GetMaterialApp(
       // Provide the generated AppLocalizations to the MaterialApp. This
       // allows descendant Widgets to display the correct translations
@@ -49,7 +45,7 @@ class MyApp extends StatelessWidget {
       // preferred ThemeMode (light, dark, or system default) from the
       // SettingsController to display the correct theme.
       theme: ThemeData.light(useMaterial3: true),
-      // darkTheme: ThemeData.dark(useMaterial3: true),
+      darkTheme: ThemeData.dark(useMaterial3: true),
       initialRoute: "/",
 
       getPages: [
@@ -61,12 +57,6 @@ class MyApp extends StatelessWidget {
         GetPage(name: "/transactions/:id", page: () => TransactionPage()),
         GetPage(name: "/statistics", page: () => StatisticsPage()),
       ],
-
-      // builder: (context, child) {
-      //   return Obx(() {
-      //     return PageBase(child: child!);
-      //   });
-      // },
     );
   }
 }

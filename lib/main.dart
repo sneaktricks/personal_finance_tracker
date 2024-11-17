@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:personal_finance_tracker/src/controllers/entry_controller.dart';
+import 'package:personal_finance_tracker/src/controllers/entry_filter_controller.dart';
 import 'package:personal_finance_tracker/src/controllers/navigation_controller.dart';
 import 'package:hive_ce_flutter/hive_flutter.dart';
 import 'package:personal_finance_tracker/src/services/services.dart';
@@ -16,6 +17,7 @@ Future<void> main() async {
   Get.lazyPut(() => IncomeService());
   Get.lazyPut(() => ExpenseService());
   Get.lazyPut(() => EntryController());
+  Get.lazyPut(() => EntryFilterController());
 
   runApp(const MyApp());
 }

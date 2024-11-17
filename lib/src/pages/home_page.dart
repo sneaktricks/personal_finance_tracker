@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:personal_finance_tracker/src/controllers/entry_controller.dart';
 import 'package:personal_finance_tracker/src/models/models.dart';
+import 'package:personal_finance_tracker/src/utils/breakpoint.dart';
 import 'package:personal_finance_tracker/src/utils/formatters.dart';
 
 class HomePage extends StatelessWidget {
@@ -11,6 +12,11 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+
+    // The code below calculates the current month balance,
+    // ranging from the first day of the current month to the
+    // first day of the following month.
     var now = DateTime.now();
     var monthStart = DateTime(now.year, now.month);
     var monthEnd =
@@ -36,26 +42,12 @@ class HomePage extends StatelessWidget {
             "Your balance this month",
             style: TextStyle(fontSize: 20),
           ),
-          // Obx(
-          //   () => AnimatedCurrency(
-          //     value: balanceThisMonth.value.toDouble(),
-          //     duration: Durations.extralong4,
-          //     builder: (v) => Text(
-          //       formatCompactCurrency(v),
-          //       style: TextStyle(
-          //           fontSize: 50,
-          //           color: switch (v) {
-          //             < 0 => Colors.red,
-          //             > 0 => Colors.green,
-          //             _ => Colors.black,
-          //           }),
-          //     ),
-          //   ),
-          // ),
-
           Obx(
             () => Text(
-              formatCompactCurrency(balanceThisMonth.value.toDouble()),
+              widthToView(width) < 1
+                  ? formatCompactCurrency(balanceThisMonth.value.toDouble())
+                  : currencyFormat
+                      .format(balanceThisMonth.value.toDouble() / 100),
               style: TextStyle(
                   fontSize: 50,
                   color: switch (balanceThisMonth.value.toDouble()) {

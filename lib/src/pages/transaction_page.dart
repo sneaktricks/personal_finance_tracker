@@ -22,6 +22,7 @@ class TransactionPage extends StatelessWidget {
 
     return Scaffold(
       body: ConstrainedView(
+        maxWidth: 400,
         omitNavRail: true,
         child: Column(
           children: [

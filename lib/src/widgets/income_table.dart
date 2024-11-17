@@ -5,6 +5,8 @@ import 'package:personal_finance_tracker/src/controllers/entry_controller.dart';
 import 'package:personal_finance_tracker/src/utils/categoryid_to_text.dart';
 import 'package:personal_finance_tracker/src/utils/formatters.dart';
 
+/// Table that displays and ranks income by category.
+/// Depends on data from [EntryController].
 class IncomeTable extends StatelessWidget {
   IncomeTable({super.key});
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// Map of categoryIds to display names
 const categoryIdToName = {
   // Income
   "salary": "Salary",
@@ -26,6 +27,7 @@ const categoryIdToName = {
   "other": "Other",
 };
 
+/// Map of categoryIds to icons
 const categoryIdToIcon = {
   // Income
   "salary": Icons.work,
@@ -52,6 +54,7 @@ const categoryIdToIcon = {
   "other": Icons.monetization_on,
 };
 
+/// List of all income categories
 const incomeCategories = [
   "salary",
   "bonus",
@@ -65,6 +68,7 @@ const incomeCategories = [
   "other",
 ];
 
+/// List of all expense categories
 const expenseCategories = [
   "housing",
   "transportation",
