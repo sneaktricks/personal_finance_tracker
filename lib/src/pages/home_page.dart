@@ -53,7 +53,9 @@ class HomePage extends StatelessWidget {
                   color: switch (balanceThisMonth.value.toDouble()) {
                     < 0 => Colors.red,
                     > 0 => Colors.green,
-                    _ => Colors.black,
+                    _ => Theme.of(context).brightness == Brightness.light
+                        ? Colors.black
+                        : Colors.white,
                   }),
             ),
           ),
