@@ -22,21 +22,19 @@ class StatisticsPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Obx(
-              () => Center(
-                child: ToggleButtons(
-                  borderRadius: const BorderRadius.all(Radius.circular(8)),
-                  constraints: const BoxConstraints(
-                    minWidth: 80.0,
-                    minHeight: 40.0,
-                  ),
-                  onPressed: (i) => selectedTab.value = [i == 0, i != 0],
-                  isSelected: selectedTab,
-                  children: const [
-                    Text("Income"),
-                    Text("Expenses"),
-                  ],
+            Center(
+              child: ToggleButtons(
+                borderRadius: const BorderRadius.all(Radius.circular(8)),
+                constraints: const BoxConstraints(
+                  minWidth: 80.0,
+                  minHeight: 40.0,
                 ),
+                onPressed: (i) => selectedTab.value = [i == 0, i != 0],
+                isSelected: selectedTab,
+                children: const [
+                  Text("Income"),
+                  Text("Expenses"),
+                ],
               ),
             ),
             Obx(() => selectedTab.first

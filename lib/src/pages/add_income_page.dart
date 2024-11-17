@@ -53,6 +53,7 @@ class AddIncomePage extends StatelessWidget {
                   FormBuilderValidators.required(),
                   FormBuilderValidators.numeric(),
                   FormBuilderValidators.positiveNumber(),
+                  FormBuilderValidators.min(0.01),
                   FormBuilderValidators.max(1e15 - 1),
                 ]),
                 valueTransformer: (value) {
