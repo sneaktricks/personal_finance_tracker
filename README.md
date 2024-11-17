@@ -65,10 +65,18 @@ Textual labels on the navigation rail are shown on screens wider than 1024px.
 
 ## Known Issues
 
+- On the all-time statistics page, the tab selector claims that the selected
+  tab is always "income". This is a visual bug and doesn't affect the functionality of the app.
+  I tried wrapping the ToggleButtons in an Obx widget, but this caused
+  an "improper use of a GetX has been detected" error on Firebase. Oddly enough, this error doesn't occur
+  in the development build.
+- Newly added entries don't immediately appear in the transactions list. To fix this, drag either endpoint of the date
+  filter slider to any other value and back.
+
 - The navigation bar and rail are re-rendered on page change.
 - The back button in the top-left corner shouldn't be rendered
   on pages with a navigation bar/rail. No idea why it's there...
 - After deleting a transaction, clicking on the back button shows the
   deleted transaction again, despite being deleted. The transaction is indeed
-  deleted from storage but the back-button seems to show an old state.
-- The code looks hideous, hacky, unintelligible spaghetti (I blame this on Dart and Flutter being bloated)
+  deleted from storage but the back-button seems to show an old state of the page.
+- The code looks hideous, hacky, unintelligible spaghetti (I blame this on Dart and Flutter being bloated, GetX only complicates this further)
