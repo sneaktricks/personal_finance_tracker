@@ -12,6 +12,7 @@ a quick glance at your monthly balance on the home page.
 - View individual transaction details and delete transactions.
 - Display your all-time top income and expense categories by value to let you analyze your finances.
 - Responsive UI, with two breakpoints and a maximum content width.
+- Dark mode
 
 ## Try it Online
 
@@ -70,4 +71,4 @@ Textual labels on the navigation rail are shown on screens wider than 1024px.
 - After deleting a transaction, clicking on the back button shows the
   deleted transaction again, despite being deleted. The transaction is indeed
   deleted from storage but the back-button seems to show an old state.
-- The code looks hideous, unintelligible spaghetti (I blame this on Dart and Flutter being bloated)
+- The code looks hideous, hacky, unintelligible spaghetti (I blame this on Dart and Flutter being bloated)
