@@ -16,6 +16,7 @@ class DateRangeFilterSlider extends StatelessWidget {
   /// a point in a [DateTimeRange].
   String label(double value) {
     return switch (value) {
+      1 => "future",
       0 => "now",
       -1 => "-1d",
       -2 => "-1w",
@@ -31,6 +32,7 @@ class DateRangeFilterSlider extends StatelessWidget {
   /// Converts a given [RangeValues] object into a [DateTimeRange].
   DateTimeRange rangeValuesToDateTimeRange(RangeValues rv) {
     final start = switch (rv.start) {
+      1 => DateTime.utc(275760, 09, 13),
       0 => DateTime.now(),
       -1 => DateTime.now().subtract(const Duration(days: 1)),
       -2 => DateTime.now().subtract(const Duration(days: 7)),
@@ -39,10 +41,11 @@ class DateRangeFilterSlider extends StatelessWidget {
       -5 => DateTime.now().subtract(const Duration(days: 365)),
       -6 => DateTime.now().subtract(const Duration(days: 3 * 365)),
       -7 => DateTime.utc(-271821, 04, 20),
-      _ => DateTime.utc(-271821, 04, 20)
+      _ => DateTime.utc(-271821, 04, 20),
     };
 
     final end = switch (rv.end) {
+      1 => DateTime.utc(275760, 09, 13),
       0 => DateTime.now(),
       -1 => DateTime.now().subtract(const Duration(days: 1)),
       -2 => DateTime.now().subtract(const Duration(days: 7)),
@@ -51,7 +54,7 @@ class DateRangeFilterSlider extends StatelessWidget {
       -5 => DateTime.now().subtract(const Duration(days: 365)),
       -6 => DateTime.now().subtract(const Duration(days: 3 * 365)),
       -7 => DateTime.utc(-271821, 04, 20),
-      _ => DateTime.now(),
+      _ => DateTime.utc(275760, 09, 13),
     };
 
     return DateTimeRange(
@@ -68,8 +71,8 @@ class DateRangeFilterSlider extends StatelessWidget {
           () => FormBuilderRangeSlider(
             name: "date_range",
             min: -7,
-            max: 0,
-            divisions: 7,
+            max: 1,
+            divisions: 8,
             initialValue: _entryFilterController.dateRangeFilterValues.value,
             labels: RangeLabels(
               label(_entryFilterController.dateRangeFilterValues.value.start
@@ -78,14 +81,15 @@ class DateRangeFilterSlider extends StatelessWidget {
                   .roundToDouble()),
             ),
             decoration: const InputDecoration(
-              label: Text("Transaction date"),
+              label: Text("Transaction Interval"),
+              helperText: "Select time period to filter transactions",
             ),
             onChanged: (values) {
               _entryFilterController.dateRangeFilterValues.value = values!;
               onChanged!(rangeValuesToDateTimeRange(values));
             },
             minValueWidget: (_) => Text(label(-7)),
-            maxValueWidget: (_) => Text(label(0)),
+            maxValueWidget: (_) => Text(label(1)),
             valueWidget: (_) {
               if (_entryFilterController.dateRangeFilterValues.value.start
                       .roundToDouble() ==
