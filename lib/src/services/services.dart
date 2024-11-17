@@ -15,6 +15,11 @@ class IncomeService {
     storage.put(key, newEntries.map((e) => e.toJson()).toList());
   }
 
+  void removeById(String id) {
+    final newEntries = entries..removeWhere((e) => e.id == id);
+    storage.put(key, newEntries.map((e) => e.toJson()).toList());
+  }
+
   BigInt get sum {
     if (!storage.containsKey(key)) {
       return BigInt.zero;
@@ -37,6 +42,11 @@ class ExpenseService {
 
   void add(ExpenseEntry entry) {
     final newEntries = entries..add(entry);
+    storage.put(key, newEntries.map((e) => e.toJson()).toList());
+  }
+
+  void removeById(String id) {
+    final newEntries = entries..removeWhere((e) => e.id == id);
     storage.put(key, newEntries.map((e) => e.toJson()).toList());
   }
 

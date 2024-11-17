@@ -36,12 +36,12 @@ class EntryController {
   }
 
   void deleteExpense(ExpenseEntry entry) {
-    expenseService.entries.removeWhere((e) => e.id == entry.id);
+    expenseService.removeById(entry.id);
     expenseEntries.removeWhere((e) => e.id == entry.id);
   }
 
   void deleteIncome(IncomeEntry entry) {
-    incomeService.entries.removeWhere((e) => e.id == entry.id);
+    incomeService.removeById(entry.id);
     incomeEntries.removeWhere((e) => e.id == entry.id);
   }
 
