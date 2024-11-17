@@ -40,19 +40,19 @@ Textual labels on the navigation rail are shown on screens wider than 1024px.
 ### How do I see my entries?
 
 1. On the navigation bar/rail, select "Transactions".
-2. Drag the "Transaction date" slider to filter entries by time. The default range is all entries until now.
+2. Drag the "Transaction Interval" slider to filter entries by time. The default range is all entries from the past to the future.
 3. The entries are shown below the slider.
 
 ### How do I see the details of an entry?
 
 1. On the navigation bar/rail, select "Transactions".
-2. In the list view below the transaction date slider,
+2. In the list view below the transaction interval slider,
    click on your desired transaction.
 
 ### How do I delete an entry?
 
 1. On the navigation bar/rail, select "Transactions".
-2. In the list view below the transaction date slider,
+2. In the list view below the transaction interval slider,
    click on the entry you want to delete.
 3. Click the "Delete" button below the transaction details.
 
