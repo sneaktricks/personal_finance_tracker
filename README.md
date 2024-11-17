@@ -10,7 +10,7 @@ a quick glance at your monthly balance on the home page.
 - Create income and expense entries, and categorize them.
 - Check all your transaction entries, with the ability to filter by time.
 - View individual transaction details and delete transactions.
-- Display your all-time top income and expense categories by value to let you analyze your finances.
+- See your all-time top income and expense categories by value to let you analyze your finances.
 - Responsive UI, with two breakpoints and a maximum content width.
 - Dark mode
 
